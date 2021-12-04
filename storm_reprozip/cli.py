@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# reprozip-proxy is free software; you can redistribute it and/or modify it
+# storm-reprozip is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 import os
@@ -15,8 +15,8 @@ from pathlib import Path
 from rpaths import Path as rPath
 
 from reprounzip.common import RPZPack, load_config
-from reprozip_proxy.busybox import busybox_bundle_cmd, BusyBoxWrapperBuilder
-from reprozip_proxy.reprozip import (
+from .busybox import busybox_bundle_cmd, BusyBoxWrapperBuilder
+from .reprozip import (
     reprozip_extract_rpzfiles,
     reprozip_extract_bundle_input,
 )
