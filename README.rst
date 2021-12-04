@@ -1,11 +1,11 @@
 ..
     Copyright (C) 2021 Storm Project.
 
-    reprozip-proxy is free software; you can redistribute it and/or modify
+    storm-reprozip is free software; you can redistribute it and/or modify
     it under the terms of the MIT License; see LICENSE file for more details.
 
 ================
- reprozip-proxy
+ storm-reprozip
 ================
 
 .. image:: https://github.com/storm-platform/reprozip-proxy/workflows/CI/badge.svg
