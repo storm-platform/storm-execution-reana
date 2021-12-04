@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# reprozip-proxy is free software; you can redistribute it and/or modify it
+# storm-reprozip is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 import os
@@ -15,6 +15,8 @@ from reprounzip.unpackers.common.x11 import X11Handler
 
 
 class BusyBoxWrapperBuilder:
+    """Busybox wrapper for reprozip operations."""
+
     def __init__(self, cmds=None, rpzfiles=None, bundle_data=None):
         self._cmds = cmds
         self._rpzfiles = rpzfiles

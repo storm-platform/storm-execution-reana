@@ -39,33 +39,47 @@ def cli():
 def run(bundle, input_file, input_name):
     os.chdir(PROXY_DATA)
     proxy_path = Path.cwd() / "proxy-data"
+    proxy_path.mkdir(exist_ok=True)
 
-    # defining the bundle
+    #
+    # Define reprozip bundle.
+    #
     reprozip_bundle = RPZPack(bundle)
 
-    # defining configuration files
+    #
+    # Configuration files load.
+    #
     config_dir = Path(tempfile.mkdtemp())
     config_file = rPath((config_dir / "config.yml").as_posix())
 
-    # extract and load
+    #
+    # Extract and load.
+    #
     reprozip_bundle.extract_config(config_file)
     config = load_config(config_file, True)
 
     click.echo(f"Temporary directory: {proxy_path.as_posix()}")
     os.makedirs(proxy_path, exist_ok=True)
 
-    # rpz files
-    click.echo("Generating rpz-files...")
-    rpzfiles_path = rPath((proxy_path / "rpz-files.list").as_posix())
-
-    reprozip_extract_rpzfiles(reprozip_bundle, config, rpzfiles_path)
-
+    #
+    # Data Files.
+    #
     click.echo("Extract data files...")
     bundle_data = rPath((proxy_path / "data.tgz").as_posix())
 
     reprozip_bundle.copy_data_tar(bundle_data)
 
-    # preparing busybox shell command
+    #
+    # RPZ Files.
+    #
+    click.echo("Generating rpz-files...")
+    rpzfiles_path = rPath((proxy_path / "rpz-files.list").as_posix())
+
+    reprozip_extract_rpzfiles(reprozip_bundle, config, rpzfiles_path)
+
+    #
+    # Define Busybox shell command.
+    #
     click.echo("Preparing busybox commands...")
     cmds = busybox_bundle_cmd(config.runs)
 
@@ -76,10 +90,16 @@ def run(bundle, input_file, input_name):
         .add_rpzfiles(rpzfiles_path)
     )
 
+    #
+    # Busybox linking.
+    #
     click.echo("Extract busybox...")
     # Warning! The command below overwrites all files in your local environment.
     busybox_wrapper.link_environment()
 
+    #
+    # Files replace.
+    #
     click.echo("Check and replace input files...")
     inputs = reprozip_extract_bundle_input(config)
     user_defined_inputs = list(zip(input_name, input_file))

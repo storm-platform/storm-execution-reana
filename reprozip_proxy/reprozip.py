@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# reprozip-proxy is free software; you can redistribute it and/or modify it
+# storm-reprozip is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from itertools import chain
@@ -21,13 +21,15 @@ def reprozip_extract_bundle_input(config):
 
     # filtering by working dir
     inputs = []
-    for input_output_file in config.inputs_outputs:
+    for file_key in config.inputs_outputs:
+
+        input_output_file = config.inputs_outputs[file_key]
 
         # verify if file is within working dir
-        if workingdir in input_output_file["path"]:
+        if input_output_file.path.lies_under(workingdir):
 
             # verify if file is a input (written by nobody)
-            if len(input_output_file["written_by_runs"]) == 0:
+            if len(input_output_file.write_runs) == 0:
                 # yes! this is a input file
                 inputs.append(input_output_file)
     return inputs
@@ -60,7 +62,7 @@ def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
             or f.path.lies_under("/var")
         ):
             continue
-        # XXX Check remove_data_prefix method
+
         path = PosixPath("/")
         for c in reprozip_bundle.remove_data_prefix(f.path).components:
             path = path / c
@@ -76,3 +78,6 @@ def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
         for p in reversed(pathlist):
             filelist.write(join_root(reprozip_bundle.data_prefix, p).path)
             filelist.write(b"\0")
+
+
+__all__ = ("reprozip_extract_rpzfiles", "reprozip_extract_bundle_input")
