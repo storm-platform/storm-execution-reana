@@ -68,7 +68,7 @@ class BusyBoxWrapperBuilder:
             file.write(self._cmds)
 
 
-def busybox_bundle_cmd(bundle_runs, include_user_definition: bool = True):
+def busybox_bundle_cmd(bundle_runs, include_user_definition: bool):
     """Prepare the busybox cmd to run reprozip bundle.
 
     Args:
@@ -110,7 +110,7 @@ def busybox_bundle_cmd(bundle_runs, include_user_definition: bool = True):
             uid = run.get("uid", 1000)
             gid = run.get("gid", 1000)
 
-            cmd = ("/rpzsudo '#%d' '#%d'" % (uid, gid)) + cmd
+            cmd = ("/rpzsudo '#%d' '#%d' " % (uid, gid)) + cmd
 
         cmds.append(cmd)
     cmds = x11.init_cmds + cmds
