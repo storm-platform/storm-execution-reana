@@ -21,6 +21,8 @@ from reprozip_proxy.reprozip import (
     reprozip_extract_bundle_input,
 )
 
+from .config import PROXY_DATA
+
 
 @click.group()
 def cli():
@@ -35,8 +37,8 @@ def cli():
 @click.option("--input-file", multiple=True)
 @click.option("--input-name", multiple=True)
 def run(bundle, input_file, input_name):
-    # os.chdir(os.environ["HOME"])
-    proxy_path = Path.cwd() / "proxy"
+    os.chdir(PROXY_DATA)
+    proxy_path = Path.cwd() / "proxy-data"
 
     # defining the bundle
     reprozip_bundle = RPZPack(bundle)
@@ -76,7 +78,7 @@ def run(bundle, input_file, input_name):
 
     click.echo("Extract busybox...")
     # Warning! The command below overwrites all files in your local environment.
-    # obj.extract_reprozip_environ()
+    busybox_wrapper.link_environment()
 
     click.echo("Check and replace input files...")
     inputs = reprozip_extract_bundle_input(config)

@@ -40,7 +40,7 @@ class BusyBoxWrapperBuilder:
 
         return self
 
-    def as_environment(self):
+    def link_environment(self):
         """Link package data to the local operational system.
 
         Warning:
@@ -58,10 +58,10 @@ class BusyBoxWrapperBuilder:
 
         os.system(command)
 
-    def create_cmd_file(self, base_directory: str):
+    def create_cmd_file(self, output_directory: str):
         """Create a file with the busybox cmd commands (To run the experiments reproduction)."""
 
-        cmdfile = Path(base_directory) / "cmd"
+        cmdfile = Path(output_directory) / "cmd"
         with open(cmdfile, "w") as file:
             file.write(self._cmds)
 
