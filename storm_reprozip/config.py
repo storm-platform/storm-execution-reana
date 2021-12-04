@@ -9,4 +9,4 @@
 
 import os
 
-PROXY_DATA = os.getenv("PROXY_DATA", "/proxy")
+INCLUDE_USER_DEFINITION = os.getenv("INCLUDE_USER_DEFINITION", True)

@@ -21,7 +21,7 @@ from .reprozip import (
     reprozip_extract_bundle_input,
 )
 
-from .config import PROXY_DATA
+from .config import INCLUDE_USER_DEFINITION
 
 
 @click.group()
@@ -37,8 +37,7 @@ def cli():
 @click.option("--input-file", multiple=True)
 @click.option("--input-name", multiple=True)
 def run(bundle, input_file, input_name):
-    os.chdir(PROXY_DATA)
-    proxy_path = Path.cwd() / "proxy-data"
+    proxy_path = Path.cwd()
     proxy_path.mkdir(exist_ok=True)
 
     #
@@ -81,7 +80,7 @@ def run(bundle, input_file, input_name):
     # Define Busybox shell command.
     #
     click.echo("Preparing busybox commands...")
-    cmds = busybox_bundle_cmd(config.runs)
+    cmds = busybox_bundle_cmd(config.runs, INCLUDE_USER_DEFINITION)
 
     busybox_wrapper = (
         BusyBoxWrapperBuilder()

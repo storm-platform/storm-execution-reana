@@ -68,11 +68,13 @@ class BusyBoxWrapperBuilder:
             file.write(self._cmds)
 
 
-def busybox_bundle_cmd(bundle_runs):
+def busybox_bundle_cmd(bundle_runs, include_user_definition: bool = True):
     """Prepare the busybox cmd to run reprozip bundle.
 
     Args:
         bundle_runs (List): Bundle executions
+
+        include_user_definition (bool): Flag to enable the user definition in the generated command.
 
     Note:
         This function is based on `reprounzip-docker`: https://github.com/VIDA-NYU/reprozip/blob/929af95f83c37ee4634475d80711ea6c55413f90/reprounzip-docker/reprounzip/unpackers/docker.py
@@ -100,12 +102,15 @@ def busybox_bundle_cmd(bundle_runs):
         argv = [run["binary"]] + run["argv"][1:]
         cmd += " ".join(shell_escape(a) for a in argv)
 
-        # defining user and group id
-        uid = run.get("uid", 1000)
-        gid = run.get("gid", 1000)
-
         # preparing the shell command
-        cmd = "/rpzsudo '#%d' '#%d' /busybox sh -c %s" % (uid, gid, shell_escape(cmd))
+        cmd = "/busybox sh -c %s" % (shell_escape(cmd))
+
+        # defining user and group id
+        if include_user_definition:
+            uid = run.get("uid", 1000)
+            gid = run.get("gid", 1000)
+
+            cmd = ("/rpzsudo '#%d' '#%d'" % (uid, gid)) + cmd
 
         cmds.append(cmd)
     cmds = x11.init_cmds + cmds
