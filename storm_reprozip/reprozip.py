@@ -10,8 +10,7 @@ from itertools import chain
 from reprounzip.common import RPZPack
 from reprounzip.utils import join_root
 
-from rpaths import Path
-from rpaths import PosixPath
+from rpaths import Path, PosixPath
 
 
 def reprozip_extract_bundle_input(config):
@@ -56,7 +55,7 @@ def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
     listoffiles = list(chain(other_files, missing_files))
 
     for f in listoffiles:
-        if f.path.name == "resolv.conf" and (
+        if f.path.unicodename in ("resolv.conf", "hosts") and (
             f.path.lies_under("/etc")
             or f.path.lies_under("/run")
             or f.path.lies_under("/var")
@@ -70,13 +69,14 @@ def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
                 continue
             paths.add(path)  # ; print(path)
             if path in data_files:
-                pathlist.append(path)
+                if path != "/etc":
+                    pathlist.append(path)
             else:
                 print(f"missing file {path}")
     reprozip_bundle.close()
     with Path(output_file).open("wb") as filelist:
-        for p in reversed(pathlist):
-            filelist.write(join_root(reprozip_bundle.data_prefix, p).path)
+        for p in pathlist:
+            filelist.write(join_root(PosixPath(""), p).path)
             filelist.write(b"\0")
 
 

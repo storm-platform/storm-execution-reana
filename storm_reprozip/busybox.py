@@ -55,8 +55,8 @@ class BusyBoxWrapperBuilder:
 
         os.chdir("/")
         command = f"""
-        cd / && tar zpxf {rpzdata} -U --recursive-unlink --numeric-owner --strip=1 --null -T {rpzfiles} || /busybox echo "TAR reports errors, this might or might not prevent the execution to run"
-        """.strip()
+            cd / && /rpztar {rpzdata} {rpzfiles}
+        """
 
         os.system(command)
 
