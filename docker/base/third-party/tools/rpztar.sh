@@ -6,11 +6,11 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 #
-# Proxing the reprozip experiment bundle
+# Download URL
 #
-storm-reprozip run --bundle /opt/input/package.rpz
+RPZTAR_URL=https://github.com/remram44/rpztar/releases/download/v1/rpztar-x86_64
 
 #
-# Creating a base user
+# Download the rpztar (x86-64)
 #
-/busybox adduser reprouser -u 1000 --disabled-password --gecos ""
+wget -O /rpztar ${RPZTAR_URL}

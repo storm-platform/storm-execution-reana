@@ -6,11 +6,11 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 #
-# Proxing the reprozip experiment bundle
+# Download URL
 #
-storm-reprozip run --bundle /opt/input/package.rpz
+RPZSUDO_URL=https://github.com/remram44/static-sudo/releases/download/current/rpzsudo-x86_64
 
 #
-# Creating a base user
+# Download the rpzsudo (x86-64)
 #
-/busybox adduser reprouser -u 1000 --disabled-password --gecos ""
+wget -O /rpzsudo ${RPZSUDO_URL}

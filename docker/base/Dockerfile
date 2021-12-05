@@ -4,7 +4,12 @@
 # storm-reprozip is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
+#
+# Compiled tool layers
+#
 FROM amd64/busybox:1.30.0-glibc as busybox
+FROM storm/storm-reprozip-parser:0.1 as storm-parser
+
 FROM ubuntu:20.04
 
 #
@@ -23,6 +28,11 @@ COPY --from=busybox /bin/busybox /busybox
 RUN ["/busybox", "--install", "/bin"]
 
 #
+# Install storm-reprozip-parser
+#
+COPY --from=storm-parser /usr/src/app/storm-parser /storm-parser
+
+#
 # Install storm-reprozip
 #
 COPY . /opt/proxy/reprozip_proxy
@@ -31,10 +41,9 @@ RUN pip3 install /opt/proxy/reprozip_proxy
 #
 # Environment files
 #
+COPY docker/base/third-party/ /opt/third-party
+RUN cd /opt/third-party \
+    && chmod +x install.sh \
+    && ./install.sh
 
-
-COPY docker/proxy.sh /proxy.sh
-COPY docker/third-party/rpztar /rpztar
-COPY docker/third-party/rpzsudo_x86-64_20210618-01 /rpzsudo
-
-RUN chmod +x /busybox /rpzsudo /rpztar /proxy.sh
+RUN chmod +x /rpzsudo /rpztar /storm-parser
