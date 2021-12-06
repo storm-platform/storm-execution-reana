@@ -32,7 +32,7 @@
 About
 =====
 
-Storm Job Plugin to allow the experiment reproduction using the `Reana <https://reanahub.io/>_` services.
+Storm Job Plugin to allow the experiment reproduction using the `Reana <https://reanahub.io/>`_ services.
 
 - Free software: MIT license;
 - Documentation: https://storm-job-reana.readthedocs.io/
