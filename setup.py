@@ -2,10 +2,10 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-reprozip is free software; you can redistribute it and/or modify it
+# storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Reprozip utility that allows you to run Docker unpackers inside Docker."""
+"""Plugin for the Storm Job to enable experiments execution on REANA instances."""
 
 import os
 
@@ -21,38 +21,70 @@ extras_require = {
         "Sphinx>=3,<4",
     ],
     "tests": tests_require,
+    # Reprozip
+    "reprozip-base": [
+        # Reprozip dependencies
+        "rpaths>=1.0.0,<1.1",
+        "reprounzip>=1.1,<2.0",
+    ],
+    "reprozip-ws": [
+        # General
+        "docker-py>=1.10.6,<2.0",
+        # Reana
+        "reana-client==0.8.0",
+        "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons",
+        # Storm
+        "storm-graph @ git+https://github.com/storm-platform/storm-graph",
+        "storm-pipeline @ git+https://github.com/storm-platform/storm-pipeline",
+        "storm-compendium @ git+https://github.com/storm-platform/storm-compendium",
+    ],
+    "service": [
+        # Invenio dependencies
+        "invenio-records-resources>=0.17.0,<0.18",
+        "invenio-drafts-resources>=0.14.0,<0.15.0",
+    ],
 }
 
-extras_require["all"] = [req for exts, reqs in extras_require.items() for req in reqs]
+extras_require["all"] = [req for _, reqs in extras_require.items() for req in reqs]
 
 setup_requires = []
 
-install_requires = ["click>=7.1.0", "reprounzip>=1.1,<2.0", "rpaths>=1.0.0,<1.1"]
+install_requires = [
+    # General dependencies
+    "click>=7.1.0",
+]
+
 
 packages = find_packages()
 
 
 # Get the version string. Cannot be done with import!
 g = {}
-with open(os.path.join("storm_reprozip", "version.py"), "rt") as fp:
+with open(os.path.join("storm_job_reana", "version.py"), "rt") as fp:
     exec(fp.read(), g)
     version = g["__version__"]
 
 setup(
-    name="storm-reprozip",
+    name="storm-job-reana",
     version=version,
     description=__doc__,
     long_description=readme + "\n\n" + history,
-    keywords=["Utility", "Reproducible Research", "ReproZip", "Storm Platform"],
+    keywords=[
+        "Utility",
+        "Reproducible Research",
+        "ReproZip",
+        "Reana",
+        "Storm Platform",
+    ],
     license="MIT",
     author="Felipe Menino Carlos",
     author_email="felipe.carlos@inpe.br",
-    url="https://github.com/storm-platform/storm-reprozip",
+    url="https://github.com/storm-platform/storm-job-reana",
     packages=packages,
     zip_safe=False,
     include_package_data=True,
     platforms="any",
-    entry_points={"console_scripts": ["storm-reprozip = storm_reprozip.cli:cli"]},
+    entry_points={"console_scripts": ["storm-job-reana = storm_job_reana.cli:cli"]},
     extras_require=extras_require,
     install_requires=install_requires,
     setup_requires=setup_requires,

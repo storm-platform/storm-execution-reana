@@ -1,11 +1,11 @@
 ..
     Copyright (C) 2021 Storm Project.
 
-    storm-reprozip is free software; you can redistribute it and/or modify
+    storm-job-reana is free software; you can redistribute it and/or modify
     it under the terms of the MIT License; see LICENSE file for more details.
 
 
 Usage
 =====
 
-.. automodule:: storm_reprozip
+.. automodule:: storm_job_reana

@@ -1,12 +1,12 @@
 ..
     Copyright (C) 2021 Storm Project.
 
-    storm-reprozip is free software; you can redistribute it and/or modify
+    storm-job-reana is free software; you can redistribute it and/or modify
     it under the terms of the MIT License; see LICENSE file for more details.
 
-================================
- Storm Reprozip utility library
-================================
+==================================
+ Storm Job Plugin - Reana Executor
+==================================
 
 .. image:: https://img.shields.io/badge/license-MIT-green
         :target: https://github.com/storm-platform/storm-reprozip/blob/master/LICENSE
@@ -32,7 +32,7 @@
 About
 =====
 
-Utility library to facilitate the use of Reprozip in the Storm web services.
+Storm Job Plugin to allow the experiment reproduction using the `Reana <https://reanahub.io/>_` services.
 
 - Free software: MIT license;
-- Documentation: https://storm-reprozip.readthedocs.io/
+- Documentation: https://storm-job-reana.readthedocs.io/

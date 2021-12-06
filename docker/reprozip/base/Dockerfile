@@ -1,7 +1,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-reprozip is free software; you can redistribute it and/or modify it
+# storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 #
@@ -17,6 +17,7 @@ FROM ubuntu:20.04
 #
 RUN apt update -y \
     && apt install \
+        git \
         python3 \
         python3-pip \
         python3-dev -y
@@ -36,12 +37,13 @@ COPY --from=storm-parser /usr/src/app/storm-parser /storm-parser
 # Install storm-reprozip
 #
 COPY . /opt/proxy/reprozip_proxy
-RUN pip3 install /opt/proxy/reprozip_proxy
+RUN cd /opt/proxy/reprozip_proxy/ \
+    && pip3 install -e .[reprozip-base]
 
 #
 # Environment files
 #
-COPY docker/base/third-party/ /opt/third-party
+COPY docker/reprozip/base/third-party/ /opt/third-party
 RUN cd /opt/third-party \
     && chmod +x install.sh \
     && ./install.sh

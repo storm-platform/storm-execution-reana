@@ -5,4 +5,10 @@
 # storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Module tests."""
+"""Version information for storm-job-reana.
+
+This file is imported by ``storm_job_reana.__init__``,
+and parsed by ``setup.py``.
+"""
+
+__version__ = "0.1.0"

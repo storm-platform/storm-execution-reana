@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-reprozip is free software; you can redistribute it and/or modify it
+# storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 """Sphinx configuration."""
@@ -45,7 +45,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"storm-reprozip"
+project = u"storm-job-reana"
 copyright = u"2021, Storm Project"
 author = u"Felipe Menino Carlos"
 
@@ -58,7 +58,7 @@ author = u"Felipe Menino Carlos"
 # Get the version string. Cannot be done with import!
 g = {}
 with open(
-    os.path.join(os.path.dirname(__file__), "..", "reprozip_proxy", "version.py"), "rt"
+    os.path.join(os.path.dirname(__file__), "..", "storm_job_reana", "version.py"), "rt"
 ) as fp:
     exec(fp.read(), g)
     version = g["__version__"]
@@ -117,13 +117,13 @@ html_theme = "alabaster"
 html_theme_options = {
     "description": "Reprozip utility that allows you to run Docker unpackers inside Docker.",
     "github_user": "inveniosoftware",
-    "github_repo": "storm-reprozip",
+    "github_repo": "storm-job-reana",
     "github_button": False,
     "github_banner": True,
     "show_powered_by": False,
     "extra_nav_links": {
-        "storm-reprozip@GitHub": "https://github.com/storm-platform/storm-reprozip",
-        "storm-reprozip@PyPI": "https://pypi.python.org/pypi/storm-reprozip/",
+        "storm-job-reana@GitHub": "https://github.com/storm-platform/storm-job-reana",
+        "storm-job-reana@PyPI": "https://pypi.python.org/pypi/storm-job-reana/",
     },
 }
 
@@ -228,7 +228,7 @@ html_sidebars = {
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "storm-reprozip_namedoc"
+htmlhelp_basename = "storm_job_reana_namedoc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -249,8 +249,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "storm-reprozip.tex",
-        u"storm-reprozip Documentation",
+        "storm-job-reana.tex",
+        u"storm-job-reana Documentation",
         u"Felipe Menino Carlos",
         "manual",
     ),
@@ -282,7 +282,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, "storm-reprozip", u"storm-reprozip Documentation", [author], 1)
+    (master_doc, "storm-job-reana", u"storm-job-reana Documentation", [author], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -297,10 +297,10 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "storm-reprozip",
-        u"storm-reprozip Documentation",
+        "storm-job-reana",
+        u"storm-job-reana Documentation",
         author,
-        "storm-reprozip",
+        "storm-job-reana",
         "Reprozip utility that allows you to run Docker unpackers inside Docker.",
         "Miscellaneous",
     ),

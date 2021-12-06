@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-reprozip is free software; you can redistribute it and/or modify it
+# storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from itertools import chain
@@ -13,13 +13,15 @@ from reprounzip.utils import join_root
 from rpaths import Path, PosixPath
 
 
-def reprozip_extract_bundle_input(config):
+def reprozip_extract_bundle_io(config):
     """Extract reprozip bundle inputs."""
 
     workingdir = config.runs[0]["workingdir"]
 
     # filtering by working dir
     inputs = []
+    outputs = []
+
     for file_key in config.inputs_outputs:
 
         input_output_file = config.inputs_outputs[file_key]
@@ -31,7 +33,10 @@ def reprozip_extract_bundle_input(config):
             if len(input_output_file.write_runs) == 0:
                 # yes! this is a input file
                 inputs.append(input_output_file)
-    return inputs
+            else:
+                outputs.append(input_output_file)
+
+    return inputs, outputs
 
 
 def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
@@ -80,4 +85,4 @@ def reprozip_extract_rpzfiles(reprozip_bundle: RPZPack, config, output_file):
             filelist.write(b"\0")
 
 
-__all__ = ("reprozip_extract_rpzfiles", "reprozip_extract_bundle_input")
+__all__ = ("reprozip_extract_rpzfiles", "reprozip_extract_bundle_io")

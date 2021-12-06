@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-reprozip is free software; you can redistribute it and/or modify it
+# storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 import os
@@ -16,27 +16,15 @@ from rpaths import Path as rPath
 
 from reprounzip.common import RPZPack, load_config
 from .busybox import busybox_bundle_cmd, BusyBoxWrapperBuilder
-from .reprozip import (
+from ..reprozip import (
     reprozip_extract_rpzfiles,
-    reprozip_extract_bundle_input,
+    reprozip_extract_bundle_io,
 )
 
-from .config import INCLUDE_USER_DEFINITION
+from ....config import REPROZIP_INCLUDE_USER_DEFINITION
 
 
-@click.group()
-def cli():
-    """
-    :return:
-    """
-    pass
-
-
-@cli.command()
-@click.option("--bundle", required=True)
-@click.option("--input-file", multiple=True)
-@click.option("--input-name", multiple=True)
-def run(bundle, input_file, input_name):
+def reprozip_proxy_run(bundle, input_file, input_name):
     proxy_path = Path.cwd()
     proxy_path.mkdir(exist_ok=True)
 
@@ -80,7 +68,7 @@ def run(bundle, input_file, input_name):
     # Define Busybox shell command.
     #
     click.echo("Preparing busybox commands...")
-    cmds = busybox_bundle_cmd(config.runs, INCLUDE_USER_DEFINITION)
+    cmds = busybox_bundle_cmd(config.runs, REPROZIP_INCLUDE_USER_DEFINITION)
 
     busybox_wrapper = (
         BusyBoxWrapperBuilder()
@@ -100,7 +88,7 @@ def run(bundle, input_file, input_name):
     # Files replace.
     #
     click.echo("Check and replace input files...")
-    inputs = reprozip_extract_bundle_input(config)
+    inputs, _ = reprozip_extract_bundle_io(config)
     user_defined_inputs = list(zip(input_name, input_file))
 
     if len(inputs) == 0:
@@ -130,3 +118,6 @@ def run(bundle, input_file, input_name):
 
     click.echo("Generating experiment command file...")
     busybox_wrapper.create_cmd_file(proxy_path)
+
+
+__all__ = "reprozip_proxy_run"
