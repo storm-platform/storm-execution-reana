@@ -30,7 +30,7 @@ extras_require = {
     "reprozip-service": [
         # General
         "pydash>=5.1.0,<6.0",
-        "docker-py>=1.10.6,<2.0",
+        "docker>=5.0.3,<6.0",
         # Reana
         "reana-client==0.8.0",
         "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons",  # Modified for the storm platform.
