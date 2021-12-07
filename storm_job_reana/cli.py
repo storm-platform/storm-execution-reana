@@ -20,7 +20,7 @@ def init_cli():
     def storm_job_reana():
         """Storm Job Reana base CLI."""
 
-    # adding view modules
+    # adding commands
     for module in MODULES:
         mod = import_module(module)
         mod.add_command(storm_job_reana)

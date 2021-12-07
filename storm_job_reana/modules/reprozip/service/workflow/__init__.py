@@ -5,7 +5,8 @@
 # storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-from .service import job_service
+from .serial import serial_execution_task
+from ..strategy import WorkflowSchedulerStrategy
 
 
-__all__ = "job_service"
+WorkflowSchedulerStrategy.register("serial", serial_execution_task)

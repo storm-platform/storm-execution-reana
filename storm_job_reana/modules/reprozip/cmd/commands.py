@@ -15,13 +15,18 @@ from pathlib import Path
 from rpaths import Path as rPath
 
 from reprounzip.common import RPZPack, load_config
-from .busybox import busybox_bundle_cmd, BusyBoxWrapperBuilder
-from ..reprozip import (
+
+from storm_job_reana.modules.reprozip.reprozip import (
     reprozip_extract_rpzfiles,
     reprozip_extract_bundle_io,
 )
 
-from ....config import REPROZIP_INCLUDE_USER_DEFINITION
+from storm_job_reana.modules.reprozip.cmd.busybox import (
+    BusyBoxWrapperBuilder,
+    busybox_bundle_cmd,
+)
+
+from storm_job_reana.config import REPROZIP_INCLUDE_USER_DEFINITION
 
 
 def reprozip_proxy_run(bundle, input_file, input_name):

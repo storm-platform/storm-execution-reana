@@ -22,26 +22,24 @@ extras_require = {
     ],
     "tests": tests_require,
     # Reprozip
-    "reprozip-base": [
+    "reprozip-cli": [
         # Reprozip dependencies
         "rpaths>=1.0.0,<1.1",
         "reprounzip>=1.1,<2.0",
     ],
-    "reprozip-ws": [
+    "reprozip-service": [
         # General
+        "pydash>=5.1.0,<6.0",
         "docker-py>=1.10.6,<2.0",
         # Reana
         "reana-client==0.8.0",
-        "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons",
+        "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons",  # Modified for the storm platform.
         # Storm
-        "storm-graph @ git+https://github.com/storm-platform/storm-graph",
         "storm-pipeline @ git+https://github.com/storm-platform/storm-pipeline",
-        "storm-compendium @ git+https://github.com/storm-platform/storm-compendium",
     ],
-    "service": [
-        # Invenio dependencies
-        "invenio-records-resources>=0.17.0,<0.18",
-        "invenio-drafts-resources>=0.14.0,<0.15.0",
+    "service-base": [
+        # Storm
+        "storm-compendium @ git+https://github.com/storm-platform/storm-compendium",
     ],
 }
 
@@ -84,7 +82,18 @@ setup(
     zip_safe=False,
     include_package_data=True,
     platforms="any",
-    entry_points={"console_scripts": ["storm-job-reana = storm_job_reana.cli:cli"]},
+    entry_points={
+        "console_scripts": ["storm-job-reana = storm_job_reana.cli:cli"],
+        "storm_job.plugins": [
+            "storm-job-reana-reprozip = storm_job_reana.modules.reprozip:job_service_metadata"
+        ],
+        "invenio_db.models": [
+            "storm_job_reana_docker_models = storm_job_reana.modules.environment.docker"
+        ],
+        "invenio_celery.tasks": [
+            "storm_job_reana = storm_job_reana.modules.reprozip.service.workflow.serial",
+        ],
+    },
     extras_require=extras_require,
     install_requires=install_requires,
     setup_requires=setup_requires,
