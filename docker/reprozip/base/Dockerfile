@@ -38,7 +38,7 @@ COPY --from=storm-parser /usr/src/app/storm-parser /storm-parser
 #
 COPY . /opt/proxy/reprozip_proxy
 RUN cd /opt/proxy/reprozip_proxy/ \
-    && pip3 install -e .[reprozip-base]
+    && pip3 install -e .[reprozip-cli]
 
 #
 # Environment files
