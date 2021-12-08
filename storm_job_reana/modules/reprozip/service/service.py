@@ -23,7 +23,7 @@ def job_service(pipeline_id: str, **kwargs):
     strategy_fnc = WorkflowSchedulerStrategy.get_strategy(workflow_scheduler_type)
 
     # Apply the strategy
-    return strategy_fnc(pipeline_id, **kwargs)
+    return strategy_fnc.delay(pipeline_id, **kwargs)
 
 
 __all__ = "job_service"

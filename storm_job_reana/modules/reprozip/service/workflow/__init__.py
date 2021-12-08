@@ -6,7 +6,6 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from .serial import serial_execution_task
-from ..strategy import WorkflowSchedulerStrategy
 
 
-WorkflowSchedulerStrategy.register("serial", serial_execution_task)
+__all__ = "serial_execution_task"
