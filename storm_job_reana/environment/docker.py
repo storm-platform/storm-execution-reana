@@ -10,17 +10,18 @@ import docker
 from invenio_db import db
 from sqlalchemy_utils.types import UUIDType
 
+from invenio_records.systemfields import SystemFieldsMixin, ModelField
+
 from storm_compendium.compendium.records.models import CompendiumRecordMetadata
 from storm_commons.records.base import BaseSQLAlchemyModel, BaseSQLAlchemyModelAPI
 
-from invenio_records.systemfields import SystemFieldsMixin, ModelField
-from storm_job_reana.config import DOCKER_REPOSITORY_PREFIX, DOCKER_IMAGE_PREFIX
+from storm_job_reana.proxies import docker_image_prefix, docker_repository
 
 
 class DockerImageCacheHandlerModel(db.Model, BaseSQLAlchemyModel):
     """Docker Image cache handler database model."""
 
-    __tablename__ = "job_execution_image_cache"
+    __tablename__ = "job_reana_docker_images"
 
     #
     # Related compendium
@@ -79,8 +80,8 @@ class DockerImageIdentifierProvider:
         """Generate a unique identifier for an Image."""
 
         # creating the image name
-        image_name = DOCKER_IMAGE_PREFIX.format(uuid=str(uuid_))
-        image_name = f"{DOCKER_REPOSITORY_PREFIX}/{image_name}:latest"
+        image_name = docker_image_prefix.format(uuid=str(uuid_))
+        image_name = f"{docker_repository}/{image_name}:latest"
 
         return image_name
 

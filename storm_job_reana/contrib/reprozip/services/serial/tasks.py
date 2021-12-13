@@ -23,34 +23,44 @@ from storm_graph import graph_manager_from_json
 from storm_pipeline.pipeline.records.api import ResearchPipeline
 from storm_compendium.compendium.records.api import CompendiumRecord
 
-from storm_job_reana.modules.environment.docker import (
+
+from storm_job_reana.environment.docker import (
     DockerEnvironmentHandler,
     DockerImageCacheHandler,
     DockerImageIdentifierProvider,
 )
 
-from storm_job_reana.modules.reprozip.reprozip import reprozip_extract_bundle_io
-from storm_job_reana.modules.reprozip.service.image import create_proxy_dockerfile
+from storm_job_reana.contrib.reprozip.image import create_proxy_dockerfile
+from storm_reprozip_proxy.helper.reprozip import reprozip_extract_bundle_io
+
+from storm_job_reana.helper.records import pass_records
+from storm_job_reana.helper.reana import pass_reana_token
+from storm_job_reana.environment.decorator import pass_docker_handler
 
 
 @shared_task
-def serial_execution_task(pipeline_id: str, **kwargs):
+@pass_reana_token
+@pass_records
+@pass_docker_handler
+def service_task(job, pipeline, reana_access_token, docker_handler):
     """Generate Reana serial execution tasks from the Storm pipelines.
 
     Args:
-        pipeline_id (str): Unique identifier of the pipeline that will be send to the Reana Cluster.
+        job (storm_job.job.models.api.ExecutionJob): Record API to handle the executed job database record.
 
-        **kwargs (dict): Extra arguments to the task
+        pipeline (storm_pipeline.pipeline.records.api.ResearchPipeline): Record API to handle the pipeline
+                                                                         database record.
+
+        reana_access_token (str): Access token to access the Reana Services.
+
+        docker_handler (storm_job_reana.environment.docker.DockerEnvironmentHandler): Object to allow the manipulation
+                                                                                      required Docker Daemon.
     Return:
         None: The task will be send to Reana cluster and the local database will be update with the processing status.
     """
 
-    # Retrieving required params
-    reana_access_token = kwargs.get("reana_access_token")
-
     # Load the defined pipeline.
-    current_pipeline = ResearchPipeline.pid.resolve(pipeline_id)
-    graph_manager = graph_manager_from_json({"graph": current_pipeline.graph})
+    graph_manager = graph_manager_from_json({"graph": pipeline.graph})
 
     # Reana description for each vertex record.
     reana_steps = []
@@ -255,8 +265,6 @@ def serial_execution_task(pipeline_id: str, **kwargs):
         #
         # Environment
         #
-        docker_environment_handler = DockerEnvironmentHandler()
-
         try:
             vertex_environment = DockerImageCacheHandler.get_record(
                 compendium_id=vertex_uuid
@@ -279,12 +287,12 @@ def serial_execution_task(pipeline_id: str, **kwargs):
 
             # In the `path` argument, it is assumed that the directory where the
             # application is running has access to the Invenio data directory.
-            docker_environment_handler.build_image(
+            docker_handler.build_image(
                 tag=image_name,
                 path=Path.cwd().as_posix(),
                 dockerfile=dockerfile_path.as_posix(),
             )
-            docker_environment_handler.push_image(image_name)
+            docker_handler.push_image(image_name)
 
             # If no errors have occurred, then the data is saved in the cache:
             DockerImageCacheHandler.create(
@@ -349,7 +357,7 @@ def serial_execution_task(pipeline_id: str, **kwargs):
     }
 
     # creating the workflow
-    workflow_name = f"storm-job-{str(current_pipeline.id)}"
+    workflow_name = f"storm-job-{str(pipeline.id)}"
     reana_client.create_workflow(
         reana_serial_workflow, workflow_name, reana_access_token
     )

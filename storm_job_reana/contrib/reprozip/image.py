@@ -7,7 +7,8 @@
 
 from pathlib import Path
 
-from storm_job_reana.config import REPROZIP_PROXY_DOCKER_IMAGE_TAG
+from storm_commons.template import render_template
+from storm_job_reana.proxies import docker_image_tag_reprozip_proxy
 
 
 def create_proxy_dockerfile(dockerfile_path: Path, bundle_path: Path):
@@ -21,16 +22,15 @@ def create_proxy_dockerfile(dockerfile_path: Path, bundle_path: Path):
         pathlib.Path: Absolute path to the Dockerfile.
     """
     with open(dockerfile_path, "w") as ofile:
-        dockerfile_content = """
-            FROM {PROXY_IMAGE}
-            
-            # Copying files
-            COPY {BUNDLE_FILE} /opt/input/package.rpz
-        """.format(
-            PROXY_IMAGE=REPROZIP_PROXY_DOCKER_IMAGE_TAG, BUNDLE_FILE=bundle_path
+        dockerfile_content = render_template(
+            "Dockerfile",
+            "storm_job_reana.contrib.reprozip",
+            "template",
+            proxy_image=docker_image_tag_reprozip_proxy,
+            bundle_file=bundle_path,
         )
 
-        ofile.write("\n".join([i.strip() for i in dockerfile_content.split("\n")]))
+        ofile.write(dockerfile_content)
     return dockerfile_path
 
 

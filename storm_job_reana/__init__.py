@@ -7,6 +7,8 @@
 
 """Plugin for the Storm Job to enable experiments execution on REANA instances."""
 
+from .ext import StormJobReana
 from .version import __version__
 
-__all__ = "__version__"
+
+__all__ = ("__version__", "StormJobReana")

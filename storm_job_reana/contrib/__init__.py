@@ -5,7 +5,6 @@
 # storm-job-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-from .service import job_service
-
-
-__all__ = "job_service"
+CONTRIB_MODULES = [
+    "storm_job_reana.contrib.reprozip",
+]
