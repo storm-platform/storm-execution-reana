@@ -35,9 +35,7 @@ install_requires = [
     "reana-client==0.8.0",
     "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons",
     # Storm
-    "storm-pipeline @ git+https://github.com/storm-platform/storm-pipeline",
-    "storm-commons @ git+https://github.com/storm-platform/storm-compendium",
-    "storm-compendium @ git+https://github.com/storm-platform/storm-compendium",
+    "storm-pipeline @ git+https://github.com/storm-platform/storm-pipeline@main",
 ]
 
 packages = find_packages()
