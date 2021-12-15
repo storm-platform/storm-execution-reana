@@ -33,7 +33,7 @@ install_requires = [
     "docker>=5.0.3,<6.0",
     # Reana
     "reana-client @ git+https://github.com/storm-platform/tp-reana-client@master",
-    "reana-commons @ git+https://github.com/storm-platform/tp-reana-commons@master",
+    "reana-commons[yadage,snakemake] @ git+https://github.com/storm-platform/tp-reana-commons@master",
     # Storm
     "storm-pipeline @ git+https://github.com/storm-platform/storm-pipeline@main",
 ]
