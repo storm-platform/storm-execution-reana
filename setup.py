@@ -31,6 +31,7 @@ install_requires = [
     # General
     "pydash>=5.1.0,<6.0",
     "docker>=5.0.3,<6.0",
+    "reprounzip>=1.1,<2.0",
     # Reana
     "reana-client @ git+https://github.com/storm-platform/tp-reana-client@master",
     "reana-commons[yadage,snakemake] @ git+https://github.com/storm-platform/tp-reana-commons@master",
