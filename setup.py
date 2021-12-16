@@ -36,7 +36,7 @@ install_requires = [
     "reana-commons[yadage,snakemake] @ git+https://github.com/storm-platform/tp-reana-commons@master",
     # Storm
     "storm-job @ git+https://github.com/storm-platform/storm-job@main",
-    "storm-reprozip-proxy @ https://github.com/storm-platform/storm-reprozip-proxy@main"
+    "storm-reprozip-proxy @ git+https://github.com/storm-platform/storm-reprozip-proxy@main"
 ]
 
 packages = find_packages()
