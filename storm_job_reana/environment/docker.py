@@ -13,12 +13,14 @@ from sqlalchemy_utils.types import UUIDType
 from invenio_records.systemfields import SystemFieldsMixin, ModelField
 
 from storm_compendium.compendium.records.models import CompendiumRecordMetadata
-from storm_commons.records.base import BaseSQLAlchemyModel, BaseSQLAlchemyModelAPI
+
+from storm_commons.records.api import BaseRecordModelAPI
+from storm_commons.records.model import BaseRecordModel
 
 from storm_job_reana.proxies import docker_image_prefix, docker_repository
 
 
-class DockerImageCacheHandlerModel(db.Model, BaseSQLAlchemyModel):
+class DockerImageCacheHandlerModel(db.Model, BaseRecordModel):
     """Docker Image cache handler database model."""
 
     __tablename__ = "job_reana_docker_images"
@@ -37,7 +39,7 @@ class DockerImageCacheHandlerModel(db.Model, BaseSQLAlchemyModel):
     image_name = db.Column(db.String, nullable=False)
 
 
-class DockerImageCacheHandler(BaseSQLAlchemyModelAPI, SystemFieldsMixin):
+class DockerImageCacheHandler(BaseRecordModelAPI, SystemFieldsMixin):
 
     model_cls = DockerImageCacheHandlerModel
     """SQLAlchemy model class defining which table stores the records."""
