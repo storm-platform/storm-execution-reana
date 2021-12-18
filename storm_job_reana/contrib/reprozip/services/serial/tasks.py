@@ -20,12 +20,9 @@ from reana_client.api import client as reana_client
 from reprounzip.common import RPZPack, load_config
 
 from storm_graph import graph_manager_from_json
-from storm_pipeline.pipeline.records.api import ResearchPipeline
 from storm_compendium.compendium.records.api import CompendiumRecord
 
-
 from storm_job_reana.environment.docker import (
-    DockerEnvironmentHandler,
     DockerImageCacheHandler,
     DockerImageIdentifierProvider,
 )
