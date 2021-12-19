@@ -301,10 +301,10 @@ def service_task(job, pipeline, reana_access_token, docker_handler):
 
         # Reana serial step definition
         reana_step_commands = f"""
-                    /parser {vertex.name} file_mapping_specification.json input
+                    /storm-reprozip-parser {vertex.name} file_mapping_specification.json input
                         && /busybox cat /cmd | /busybox sh
                         && /busybox mkdir -p data/{vertex.name}/derived_data
-                        && /parser {vertex.name} file_mapping_specification.json output
+                        && /storm-reprozip-parser {vertex.name} file_mapping_specification.json output
                     """
 
         reana_steps.append(
