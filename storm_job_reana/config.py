@@ -7,11 +7,11 @@
 
 """Plugin for the Storm Job to enable experiments execution on REANA instances."""
 
-STORM_JOB_REANA_DOCKER_REPOSITORY = "storm"
+STORM_JOB_REANA_DOCKER_REPOSITORY = "stormproject"
 """Docker Image repository."""
 
 STORM_JOB_REANA_DOCKER_IMAGE_PREFIX = "storm-job-{uuid}"
 """Docker Image name prefix."""
 
-STORM_JOB_REANA_REPROZIP_PROXY_IMAGE = "storm/storm-reprozip-proxy:latest"
+STORM_JOB_REANA_REPROZIP_PROXY_IMAGE = "stormproject/storm-reprozip-proxy:latest"
 """Docker Image of the Storm Reprozip Proxy."""
