@@ -27,6 +27,13 @@ class PluginService:
         "title": "Reana-Reprozip job plugin (Serial execution mode)",
         "description": "Job plugin to execute reprozip experiments with Reana services using the serial mode.",
         "supported_descriptors": ["storm-core>=1.0,<2"],
+        "required_fields": [
+            {
+                "title": "REANA Rest API Access Token",
+                "description": "Your REANA access token, used to connect to preparing the Execution Job in the REANA.",
+                "field_name": "reana_access_token",
+            }
+        ],
     }
 
     #
