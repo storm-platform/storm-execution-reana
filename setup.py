@@ -66,7 +66,9 @@ setup(
     packages=packages,
     zip_safe=False,
     package_data={
-        "storm-job-reana": "contrib/services/templates"
+        "storm-job-reana": [
+            "contrib/services/templates"
+        ]
     },
     include_package_data=True,
     platforms="any",
