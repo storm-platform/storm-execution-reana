@@ -274,9 +274,12 @@ def service_task(job, pipeline, reana_access_token, docker_handler):
             environment_build_directory = vertex_directory / "docker-build"
             environment_build_directory.mkdir()
 
+            # Copying the file (bad solution here! Moving data is never a good idea)
+            data_file = environment_build_directory / "environment"
+            shutil.copyfile(environment_file.file.uri, data_file)
+
             dockerfile_path = create_proxy_dockerfile(
-                environment_build_directory / "Dockerfile",
-                Path(environment_file.file.uri),
+                environment_build_directory / "Dockerfile", "environment"
             )
 
             # Build the environment image
@@ -286,8 +289,8 @@ def service_task(job, pipeline, reana_access_token, docker_handler):
             # application is running has access to the Invenio data directory.
             docker_handler.build_image(
                 tag=image_name,
-                path=Path.cwd().as_posix(),
-                dockerfile=dockerfile_path.as_posix(),
+                path=environment_build_directory.as_posix(),
+                dockerfile="Dockerfile",
             )
             docker_handler.push_image(image_name)
 
