@@ -119,10 +119,10 @@ def service_task(job, pipeline, reana_access_token, docker_handler):
 
         inputs = py_.map(
             py_.filter(
+                inputs,
                 lambda x: x != config.inputs_outputs.get("arg")
                 if config.inputs_outputs.get("arg")
                 else True,
-                inputs,
             ),
             map_file_to_dict_operation,
         )
