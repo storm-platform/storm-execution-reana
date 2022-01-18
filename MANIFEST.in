@@ -14,3 +14,19 @@
 #  check-manifest -u
 
 prune docs/_build
+
+# added by check-manifest
+include *.rst
+include *.sh
+include *.txt
+include pytest.ini
+recursive-include docs *.bat
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs *.txt
+recursive-include docs Makefile
+recursive-include tests *.py
+
+# Templates
+recursive-include storm_job_reana/contrib/reprozip/templates/ *
+

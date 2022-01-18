@@ -25,7 +25,7 @@ def create_proxy_dockerfile(dockerfile_path: Path, bundle_path: Path):
         dockerfile_content = render_template(
             "Dockerfile",
             "storm_job_reana.contrib.reprozip",
-            "template",
+            "templates",
             proxy_image=docker_image_tag_reprozip_proxy,
             bundle_file=bundle_path,
         )
