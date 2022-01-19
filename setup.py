@@ -65,11 +65,6 @@ setup(
     url="https://github.com/storm-platform/storm-job-reana",
     packages=packages,
     zip_safe=False,
-    package_data={
-        "storm-job-reana": [
-            "contrib/services/templates"
-        ]
-    },
     include_package_data=True,
     platforms="any",
     entry_points={
