@@ -28,5 +28,5 @@ recursive-include docs Makefile
 recursive-include tests *.py
 
 # Templates
-recursive-include storm_job_reana/contrib/reprozip/templates/ *
+recursive-include storm_job_reana/contrib *
 
