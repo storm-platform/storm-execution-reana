@@ -2,13 +2,13 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-runner-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from pathlib import Path
 
 from storm_commons.template import render_template
-from storm_job_reana.proxies import docker_image_tag_reprozip_proxy
+from storm_runner_reana.proxies import docker_image_tag_reprozip_proxy
 
 
 def create_proxy_dockerfile(dockerfile_path: Path, bundle_path: Path):
@@ -24,7 +24,7 @@ def create_proxy_dockerfile(dockerfile_path: Path, bundle_path: Path):
     with open(dockerfile_path, "w") as ofile:
         dockerfile_content = render_template(
             "Dockerfile",
-            "storm_job_reana.contrib.reprozip",
+            "storm_runner_reana.contrib.reprozip",
             "templates",
             proxy_image=docker_image_tag_reprozip_proxy,
             bundle_file=bundle_path,

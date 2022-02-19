@@ -17,13 +17,13 @@ from storm_compendium.compendium.records.models import CompendiumRecordMetadata
 from storm_commons.records.api import BaseRecordModelAPI
 from storm_commons.records.model import BaseRecordModel
 
-from storm_job_reana.proxies import docker_image_prefix, docker_repository
+from storm_runner_reana.proxies import docker_image_prefix, docker_repository
 
 
 class DockerImageCacheHandlerModel(db.Model, BaseRecordModel):
     """Docker Image cache handler database model."""
 
-    __tablename__ = "job_reana_docker_images"
+    __tablename__ = "runner_reana_docker_images"
 
     #
     # Related compendium

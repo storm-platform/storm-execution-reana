@@ -2,11 +2,11 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-runner-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from importlib import import_module
-from storm_job_reana.contrib import CONTRIB_MODULES
+from storm_runner_reana.contrib import CONTRIB_MODULES
 
 
 def init_plugins():

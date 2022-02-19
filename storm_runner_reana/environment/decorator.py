@@ -2,12 +2,12 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-runner-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 from functools import wraps
 
-from storm_job_reana.environment.docker import DockerEnvironmentHandler
+from storm_runner_reana.environment.docker import DockerEnvironmentHandler
 
 
 def pass_docker_handler(f):

@@ -2,15 +2,15 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-runner-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-import storm_job_reana.config as config
-from storm_job_reana.contrib.plugin import init_plugins
+import storm_runner_reana.config as config
+from storm_runner_reana.contrib.plugin import init_plugins
 
 
-class StormJobReana:
-    """Flask extension for the Storm Job Reana services plugin."""
+class StormRunnerReana:
+    """Flask extension for the Storm Runner Reana services plugin."""
 
     def __init__(self, app=None):
         """Plugin initialization."""
@@ -22,12 +22,12 @@ class StormJobReana:
         self.init_config(app)
         self.init_plugin_services(app)
 
-        app.extensions["storm-job-reana"] = self
+        app.extensions["storm-runner-reana"] = self
 
     def init_config(self, app):
         """Initialize the application config."""
         for k in dir(config):
-            if k.startswith("STORM_JOB_REANA_"):
+            if k.startswith("STORM_RUNNER_REANA_"):
                 app.config.setdefault(k, getattr(config, k))
 
     def init_plugin_services(self, app):
@@ -35,4 +35,4 @@ class StormJobReana:
         self.plugin_services = init_plugins()
 
 
-__all__ = "StormJobReana"
+__all__ = "StormRunnerReana"

@@ -2,12 +2,12 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-runner-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Version information for storm-job-reana.
+"""Version information for storm-runner-reana.
 
-This file is imported by ``storm_job_reana.__init__``,
+This file is imported by ``storm_runner_reana.__init__``,
 and parsed by ``setup.py``.
 """
 
