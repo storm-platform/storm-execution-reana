@@ -10,7 +10,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/storm-platform/storm-job-reana/issues.
+Report bugs at https://github.com/storm-platform/storm-runner-reana/issues.
 
 If you are reporting a bug, please include:
 
@@ -33,15 +33,15 @@ is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-storm-job-reana could always use more documentation, whether as part of the
-official storm-job-reana docs, in docstrings, or even on the web in blog posts,
+storm-runner-reana could always use more documentation, whether as part of the
+official storm-runner-reana docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
 The best way to send feedback is to file an issue at
-https://github.com/storm-platform/storm-job-reana/issues.
+https://github.com/storm-platform/storm-runner-reana/issues.
 
 If you are proposing a feature:
 
@@ -53,14 +53,14 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `storm-job-reana` for local development.
+Ready to contribute? Here's how to set up `storm-runner-reana` for local development.
 
-1. Fork the `storm-platform/storm-job-reana` repo on GitHub.
+1. Fork the `storm-platform/storm-runner-reana` repo on GitHub.
 2. Clone your fork locally:
 
    .. code-block:: console
 
-      $ git clone git@github.com:your_name_here/storm-job-reana.git
+      $ git clone git@github.com:your_name_here/storm-runner-reana.git
 
 3. Install your local copy into a virtualenv. Assuming you have
    virtualenvwrapper installed, this is how you set up your fork for local
@@ -68,8 +68,8 @@ Ready to contribute? Here's how to set up `storm-job-reana` for local developmen
 
    .. code-block:: console
 
-      $ mkvirtualenv storm-job-reana
-      $ cd storm-job-reana/
+      $ mkvirtualenv storm-runner-reana
+      $ cd storm-runner-reana/
       $ pip install -e .[all]
 
 4. Create a branch for local development:
@@ -114,5 +114,5 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring.
 3. The pull request should work for Python 3.6, 3.7, 3.8 and 3.9. Check
-   https://github.com/inveniosoftware/storm-platform/storm-job-reana/actions?query=event%3Apull_request
+   https://github.com/inveniosoftware/storm-platform/storm-runner-reana/actions?query=event%3Apull_request
    and make sure that the tests pass for all supported Python versions.
