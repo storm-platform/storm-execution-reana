@@ -2,12 +2,12 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-runner-reana is free software; you can redistribute it and/or modify it
+# storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Version information for storm-runner-reana.
+"""Version information for storm-execution-reana.
 
-This file is imported by ``storm_runner_reana.__init__``,
+This file is imported by ``storm_execution_reana.__init__``,
 and parsed by ``setup.py``.
 """
 

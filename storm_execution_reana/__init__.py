@@ -5,17 +5,13 @@
 # storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
+"""Plugin for the Storm Execution to enable experiments execution on REANA instances."""
 
-[build_sphinx]
-source-dir = docs/
-build-dir = docs/_build
-all_files = 1
+from .ext import StormExecutionReana
+from .version import __version__
 
-[bdist_wheel]
-universal = 1
 
-[pydocstyle]
-add_ignore = D401
-
-[pycodestyle]
-exclude = docs/conf.py
+__all__ = (
+    "__version__",
+    "StormExecutionReana",
+)

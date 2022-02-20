@@ -2,10 +2,10 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-runner-reana is free software; you can redistribute it and/or modify it
+# storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-from storm_runner_reana.contrib.reprozip.services.serial.tasks import service_task
+from storm_execution_reana.contrib.reprozip.services.serial.tasks import service_task
 
 
 class PluginService:
@@ -13,7 +13,7 @@ class PluginService:
     #
     # General definitions
     #
-    id = "runner-reprozip-serial"
+    id = "execution-reprozip-serial"
 
     #
     # Service task
@@ -24,8 +24,8 @@ class PluginService:
     # General plugin service description
     #
     metadata = {
-        "title": "Reana-Reprozip runner plugin (Serial execution mode)",
-        "description": "Runner plugin to execute reprozip experiments with Reana services using the serial mode.",
+        "title": "Reana-Reprozip Execution plugin (Serial execution mode)",
+        "description": "Execution plugin to execute reprozip experiments with Reana services using the serial mode.",
         "supported_descriptors": ["storm-core>=1.0,<2"],
         "required_fields": [
             {

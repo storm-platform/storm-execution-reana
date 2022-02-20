@@ -1,8 +1,8 @@
 Installation
 ============
 
-storm-runner-reana is on PyPI so all you need is:
+storm-execution-reana is on PyPI so all you need is:
 
 .. code-block:: console
 
-   $ pip install storm-runner-reana
+   $ pip install storm-execution-reana

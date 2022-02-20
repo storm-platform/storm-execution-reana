@@ -2,10 +2,10 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-runner-reana is free software; you can redistribute it and/or modify it
+# storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-"""Plugin for the Storm Runner to enable experiments execution on REANA instances."""
+"""Plugin for the Storm Execution to enable experiments execution on REANA instances."""
 
 import os
 
@@ -35,7 +35,7 @@ install_requires = [
     "reana-client @ git+https://github.com/storm-platform/tp-reana-client@master",
     "reana-commons[yadage,snakemake] @ git+https://github.com/storm-platform/tp-reana-commons@master",
     # Storm
-    "storm-runner @ git+https://github.com/storm-platform/storm-job@package/rename-0.1",
+    "storm-execution @ git+https://github.com/storm-platform/storm-job@package/rename-0.1",
     "storm-reprozip-proxy @ git+https://github.com/storm-platform/storm-reprozip-proxy@main",
 ]
 
@@ -43,12 +43,12 @@ packages = find_packages()
 
 # Get the version string. Cannot be done with import!
 g = {}
-with open(os.path.join("storm_runner_reana", "version.py"), "rt") as fp:
+with open(os.path.join("storm_execution_reana", "version.py"), "rt") as fp:
     exec(fp.read(), g)
     version = g["__version__"]
 
 setup(
-    name="storm-runner-reana",
+    name="storm-execution-reana",
     version=version,
     description=__doc__,
     long_description=readme + "\n\n" + history,
@@ -62,20 +62,20 @@ setup(
     license="MIT",
     author="Felipe Menino Carlos",
     author_email="felipe.carlos@inpe.br",
-    url="https://github.com/storm-platform/storm-runner-reana",
+    url="https://github.com/storm-platform/storm-execution-reana",
     packages=packages,
     zip_safe=False,
     include_package_data=True,
     platforms="any",
     entry_points={
-        "storm_runner.plugins": [
-            "storm-runner-reana-reprozip = storm_runner_reana:StormRunnerReana"
+        "storm_execution.plugins": [
+            "storm-execution-reana-reprozip = storm_execution_reana:StormExecutionReana"
         ],
         "invenio_db.models": [
-            "storm_runner_reana_docker = storm_runner_reana.environment.docker"
+            "storm_execution_reana_docker = storm_execution_reana.environment.docker"
         ],
         "invenio_celery.tasks": [
-            "storm_runner_reana_reprozip_serial = storm_runner_reana.contrib.reprozip.services.serial.tasks",
+            "storm_execution_reana_reprozip_serial = storm_execution_reana.contrib.reprozip.services.serial.tasks",
         ],
     },
     extras_require=extras_require,

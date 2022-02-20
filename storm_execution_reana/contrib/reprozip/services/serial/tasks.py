@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-runner-reana is free software; you can redistribute it and/or modify it
+# storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 import json
@@ -22,17 +22,17 @@ from reprounzip.common import RPZPack, load_config
 from storm_graph import graph_manager_from_json
 from storm_compendium.compendium.records.api import CompendiumRecord
 
-from storm_runner_reana.environment.docker import (
+from storm_execution_reana.environment.docker import (
     DockerImageCacheHandler,
     DockerImageIdentifierProvider,
 )
 
-from storm_runner_reana.contrib.reprozip.image import create_proxy_dockerfile
+from storm_execution_reana.contrib.reprozip.image import create_proxy_dockerfile
 from storm_reprozip_proxy.helper.reprozip import reprozip_extract_bundle_io
 
-from storm_runner_reana.helper.records import pass_records
-from storm_runner_reana.helper.reana import pass_reana_token
-from storm_runner_reana.environment.decorator import pass_docker_handler
+from storm_execution_reana.helper.records import pass_records
+from storm_execution_reana.helper.reana import pass_reana_token
+from storm_execution_reana.environment.decorator import pass_docker_handler
 
 
 @shared_task
@@ -43,14 +43,14 @@ def service_task(execution, workflow, reana_access_token, docker_handler):
     """Generate Reana serial execution tasks from the Storm workflows.
 
     Args:
-        execution (storm_runner.runner.models.api.ExecutionTask): Record API to handle the executed task database record.
+        execution (storm_execution.execution.models.api.ExecutionTask): Record API to handle the executed task database record.
 
         workflow (storm_workflow.workflow.records.api.ResearchWorkflow): Record API to handle the workflow
                                                                          database record.
 
         reana_access_token (str): Access token to access the Reana Services.
 
-        docker_handler (storm_runner_reana.environment.docker.DockerEnvironmentHandler): Object to allow the manipulation
+        docker_handler (storm_execution_reana.environment.docker.DockerEnvironmentHandler): Object to allow the manipulation
                                                                                       required Docker Daemon.
     Return:
         None: The task will be send to Reana cluster and the local database will be update with the processing status.
@@ -357,7 +357,7 @@ def service_task(execution, workflow, reana_access_token, docker_handler):
     }
 
     # creating the workflow
-    workflow_name = f"storm-runner-{str(workflow.id)}"
+    workflow_name = f"storm-execution-{str(workflow.id)}"
     reana_client.create_workflow(
         reana_serial_workflow, workflow_name, reana_access_token
     )
