@@ -8,11 +8,11 @@
 from functools import wraps
 
 from storm_execution.execution.models.api import ExecutionTask
-from storm_pipeline.pipeline.records.api import ResearchPipeline
+from storm_workflow.workflow.records.api import ResearchWorkflow
 
 
 def pass_records(f):
-    """Decorator to load the ExecutionTask and ResearchPipeline."""
+    """Decorator to load the ExecutionTask and ResearchWorkflow."""
 
     @wraps(f)
     def wrapper(execution_id, reana_access_token, *args, **kwargs):
@@ -20,18 +20,18 @@ def pass_records(f):
 
             # loading the defined deposit record
             execution_object = ExecutionTask.get_record(id=execution_id)
-            pipeline_object = ResearchPipeline.pid.resolve(
-                execution_object.pipeline.data.get("id")
+            workflow_object = ResearchWorkflow.pid.resolve(
+                execution_object.workflow.data.get("id")
             )
 
         except:
             raise RuntimeError(
-                "Is not possible to load the Execution Tasks and Pipeline records."
+                "Is not possible to load the Execution Tasks and Workflow records."
             )
 
         return f(
             execution=execution_object,
-            pipeline=pipeline_object,
+            workflow=workflow_object,
             reana_access_token=reana_access_token,
             *args,
             **kwargs
