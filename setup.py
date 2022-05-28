@@ -35,7 +35,7 @@ install_requires = [
     "reana-client @ git+https://github.com/storm-platform/tp-reana-client@master",
     "reana-commons[yadage,snakemake] @ git+https://github.com/storm-platform/tp-reana-commons@master",
     # Storm
-    "storm-runner @ git+https://github.com/storm-platform/storm-job@package/rename-0.1",
+    "storm-runner @ git+https://github.com/storm-platform/storm-runner@main",
     "storm-reprozip-proxy @ git+https://github.com/storm-platform/storm-reprozip-proxy@main",
 ]
 
