@@ -20,8 +20,8 @@ def pass_records(f):
 
             # loading the defined deposit record
             execution_object = ExecutionTask.get_record(id=execution_id)
-            pipeline_object = ResearchWorkflow.pid.resolve(
-                execution_object.pipeline.data.get("id")
+            workflow_object = ResearchWorkflow.pid.resolve(
+                execution_object.workflow.data.get("id")
             )
 
         except:
@@ -31,7 +31,7 @@ def pass_records(f):
 
         return f(
             execution=execution_object,
-            pipeline=pipeline_object,
+            workflow=workflow_object,
             reana_access_token=reana_access_token,
             *args,
             **kwargs
