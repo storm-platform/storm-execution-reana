@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 Storm Project.
 #
-# storm-job-reana is free software; you can redistribute it and/or modify it
+# storm-execution-reana is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
 import docker
@@ -17,13 +17,13 @@ from storm_compendium.compendium.records.models import CompendiumRecordMetadata
 from storm_commons.records.api import BaseRecordModelAPI
 from storm_commons.records.model import BaseRecordModel
 
-from storm_runner_reana.proxies import docker_image_prefix, docker_repository
+from storm_execution_reana.proxies import docker_image_prefix, docker_repository
 
 
 class DockerImageCacheHandlerModel(db.Model, BaseRecordModel):
     """Docker Image cache handler database model."""
 
-    __tablename__ = "runner_reana_docker_images"
+    __tablename__ = "execution_reana_docker_images"
 
     #
     # Related compendium

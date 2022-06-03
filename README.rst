@@ -1,12 +1,12 @@
 ..
     Copyright (C) 2021 Storm Project.
 
-    storm-runner-reana is free software; you can redistribute it and/or modify
+    storm-execution-reana is free software; you can redistribute it and/or modify
     it under the terms of the MIT License; see LICENSE file for more details.
 
-=====================================
- Storm Runner Plugin - Reana Executor
-=====================================
+=========================================
+ Storm Execution Plugin - Reana Executor
+=========================================
 
 .. image:: https://img.shields.io/badge/license-MIT-green
         :target: https://github.com/storm-platform/storm-runner-reana/blob/master/LICENSE
@@ -32,7 +32,7 @@
 About
 =====
 
-Storm Runner Plugin to allow the experiment reproduction using the `Reana <https://reanahub.io/>`_ services.
+Storm Execution Plugin to allow the experiment reproduction using the `Reana <https://reanahub.io/>`_ services.
 
 - Free software: MIT license;
 - Documentation: https://storm-runner-reana.readthedocs.io/
