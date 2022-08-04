@@ -10,7 +10,7 @@
 STORM_EXECUTION_REANA_DOCKER_REPOSITORY = "stormproject"
 """Docker Image repository."""
 
-STORM_EXECUTION_REANA_DOCKER_IMAGE_PREFIX = "storm-runner-{uuid}"
+STORM_EXECUTION_REANA_DOCKER_IMAGE_PREFIX = "storm-execution-{uuid}"
 """Docker Image name prefix."""
 
 STORM_EXECUTION_REANA_REPROZIP_PROXY_IMAGE = "stormproject/storm-reprozip-proxy:latest"
